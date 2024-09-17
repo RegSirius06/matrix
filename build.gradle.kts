@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "net.regsirius06.matrix"
-version = "0.1.0-SNAPSHOT"
+version = "beta-0.1.1"
 
 repositories {
     mavenCentral()
