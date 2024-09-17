@@ -2,55 +2,84 @@
 
 This program is a matrix calculator that allows you to perform operations on matrices and numbers.
 
-## Commands:
+##  Matrix Calculator - User Manual
 
-* matrix - creates and manipulates matrices.
-  * new zeros [rows] [columns] initAs [name] - creates a new matrix with zeros of the specified dimensions and assigns it the given name.
-  * new ones [rows] [columns] initAs [name] - creates a new matrix with ones of the specified dimensions and assigns it the given name.
-  * new sameNumbers [rows] [columns] [number] initAs [name] - creates a new matrix with all elements set to the specified number and assigns it the given name.
-  * new identity [size] initAs [name] - creates a new identity matrix of the specified size and assigns it the given name.
-  * new [rows] [columns] initAs [name] - creates a new matrix by prompting the user to enter elements and assigns it the given name.
-  * [matrixName] putIn [newName] - creates a copy of the specified matrix and assigns it the new name.
-  * [matrixName] determinant putIn [newName] - calculates the determinant of the specified matrix and assigns it the new name.
-  * [matrixName] multiplyBy [matrixName2] putIn [newName] - multiplies the two specified matrices and assigns the result to the new name.
-  * [matrixName] multiplyByDigit [numberName] putIn [newName] - multiplies the specified matrix by the specified number and assigns the result to the new name.
-  * [matrixName] get [row] [column] putIn [newName] - retrieves the element at the specified row and column from the matrix and assigns it the new name.
-  * [matrixName] getRows putIn [newName] - retrieves the number of rows in the specified matrix and assigns it the new name.
-  * [matrixName] getColumns putIn [newName] - retrieves the number of columns in the specified matrix and assigns it the new name.
-  * [matrixName] set [row] [column] [numberName] - sets the element at the specified row and column in the matrix to the specified number.
-  * [matrixName] - displays the elements of the specified matrix.
+This program allows you to perform various operations on matrices and numbers.
 
-* number - creates and manipulates numbers.
-  * new [number] initAs [name] - creates a new number and assigns it the given name.
-  * [numberName] putIn [newName] - creates a copy of the specified number and assigns it the new name.
-  * [numberName] - displays the value of the specified number.
+###  Commands:
 
-* names - displays a list of all matrices and numbers stored in the program.
+**1.  Matrix Operations:**
 
-* forget - deletes a matrix or number.
-    * matrix [name] - deletes the matrix with the specified name.
-    * number [name] - deletes the number with the specified name.
+  * **`matrix new [zeros|ones|sameNumbers|identity|...] <parameters> [initAs <name>]`:** Creates a new matrix.
+    *  **`zeros`:** Creates a matrix filled with zeros.
+    *  **`ones`:** Creates a matrix filled with ones.
+    *  **`sameNumbers <number>`:** Creates a matrix filled with a specific number.
+    *  **`identity <size>`:** Creates an identity matrix of the given size.
+    *  **`...`:** Creates a matrix by inputting its elements.
+    *  **`<parameters>`:** For `zeros`, `ones`, `sameNumbers`: `rows columns`. For `identity`: `size`. For inputting elements: `rows columns`
+    *  **`initAs <name>`:** Assigns a name to the created matrix.  If omitted, the matrix is assigned the temporary name "__buffer__".
 
-* exit - exits the program.
+  * **`matrix <name> [determinant|addTo|multiplyBy|multiplyByDigit|getRows|getColumns|power|transposition|inverse|getWithoutRow|getWithoutColumn|minor|algebraicComplements|get|set|...] [<parameters>] [putIn <name>]`** : Performs operations on an existing matrix.
 
-* help - displays a list of available commands and examples.
+    *  **`determinant`:** Calculates the determinant of the matrix.
+    *  **`addTo <matrix name>`:** Adds the given matrix to the current matrix.
+    *  **`multiplyBy <matrix name>`:** Multiplies the current matrix by the given matrix.
+    *  **`multiplyByDigit <number name>`:** Multiplies the current matrix by the given number.
+    *  **`getRows`:** Returns the number of rows in the matrix.
+    *  **`getColumns`:** Returns the number of columns in the matrix.
+    *  **`power <power>`:** Raises the matrix to the given power.
+    *  **`transposition`:** Returns the transposed matrix.
+    *  **`inverse`:** Returns the inverse of the matrix.
+    *  **`getWithoutRow <row number>`:** Returns a new matrix without the specified row.
+    *  **`getWithoutColumn <column number>`:** Returns a new matrix without the specified column.
+    *  **`minor <row number> <column number>`:** Calculates the minor of the matrix at the given row and column.
+    *  **`algebraicComplements <row number> <column number>`:** Calculates the algebraic complement of the matrix at the given row and column.
+    *  **`get <row number> <column number>`:** Returns the element at the given row and column.
+    *  **`set <row number> <column number> <number name>`:** Sets the element at the given row and column to the specified number.
+    *  **`<parameters>`:**  Depends on the specific operation (e.g., `matrix name` for `addTo`, `power` for `power`, etc.).
+    *  **`putIn <name>`:** Assigns the result of the operation to the given name.
 
-## Example Commands:
+  * **`matrix <name>`:** Prints the matrix with its current name.
 
-```bash
-matrix new zeros 3 3 initAs A
-number new 5.2 initAs myNumber
-A multiplyByDigit myNumber putIn C
-matrix C
-number myNumber
-names
-forget C
-exit
+**2.  Number Operations:**
+
+  * **`number new <number> [initAs <name>]`:** Creates a new number.
+
+    * **`<number>`:** The number to be stored. Can be a decimal or fraction.
+    * **`initAs <name>`:** Assigns a name to the created number.  If omitted, the number is assigned the temporary name "__buffer__".
+
+  * **`number <name> [putIn <name>]`:**  Copies a number to another name.
+
+  * **`putIn <name>`:** Assigns the copied number to the given name.
+
+  * **`number <name>`:** Prints the number with its current name.
+
+**3.  General Commands:**
+
+*   **`help`:** Displays a list of available commands.
+*   **`names`:** Prints a list of currently stored matrices and numbers.
+*   **`forget <matrix|number> <name>`:** Removes the specified matrix or number.
+*   **`exit`:** Exits the program.
+
+**Example Usage:**
+
 ```
+> matrix new zeros 2 3 initAs A
+> matrix new ones 3 3 initAs B
+> matrix A multiplyBy B putIn C
+> matrix C
+> number new 2.5 putIn x
+> matrix C multiplyByDigit x
+> number new 1/2 initAs frac
+> number frac
+> forget matrix C
+> exit
+```
+
+**Note:** The program uses a case-insensitive approach to command and parameter names.
 
 ## Notes:
 
 * Matrix names and number names can be any string without spaces.
-* You can use the name `__buffer__` to store temporary results.
+* You can use the name `__buffer__` to store or get temporary results.
 * Numbers can be entered as decimals or fractions (e.g., 3.14 or 1/2).
-

@@ -132,6 +132,15 @@ public final class UI {
                                             det,
                                             TextFormatter.BLUE
                                     );
+                                } else if (Objects.equals(data[2], "addTo")) {
+                                    Matrix m = matrixMap.get(data[1]).addTo(matrixMap.get(data[3]));
+                                    if (data.length == 6 && Objects.equals(data[4], "putIn")) {
+                                        matrixMap.put(data[5], m);
+                                    }
+                                    TextFormatter.outConsole(
+                                            m.view(),
+                                            TextFormatter.BLUE
+                                    );
                                 } else if (Objects.equals(data[2], "multiplyBy")) {
                                     Matrix m = matrixMap.get(data[1]).multiplyBy(matrixMap.get(data[3]));
                                     if (data.length == 6 && Objects.equals(data[4], "putIn")) {
@@ -150,15 +159,6 @@ public final class UI {
                                             m.view(),
                                             TextFormatter.BLUE
                                     );
-                                } else if (Objects.equals(data[2], "get")) {
-                                    double x = matrixMap.get(data[1]).get(Integer.parseInt(data[3]), Integer.parseInt(data[4]));
-                                    if (data.length == 7 && Objects.equals(data[5], "putIn")) {
-                                        doubleMap.put(data[6], x);
-                                    }
-                                    TextFormatter.outConsole(
-                                            x,
-                                            TextFormatter.BLUE
-                                    );
                                 } else if (Objects.equals(data[2], "getRows")) {
                                     int x = matrixMap.get(data[1]).getRows();
                                     if (data.length == 5 && Objects.equals(data[3], "putIn")) {
@@ -172,6 +172,78 @@ public final class UI {
                                     int x = matrixMap.get(data[1]).getColumns();
                                     if (data.length == 5 && Objects.equals(data[3], "putIn")) {
                                         doubleMap.put(data[4], (double) x);
+                                    }
+                                    TextFormatter.outConsole(
+                                            x,
+                                            TextFormatter.BLUE
+                                    );
+                                } else if (Objects.equals(data[2], "power")) {
+                                    Matrix m = matrixMap.get(data[1]).power(Integer.parseInt(data[3]));
+                                    if (data.length == 6 && Objects.equals(data[4], "putIn")) {
+                                        matrixMap.put(data[5], m);
+                                    }
+                                    TextFormatter.outConsole(
+                                            m.view(),
+                                            TextFormatter.BLUE
+                                    );
+                                } else if (Objects.equals(data[2], "transposition")) {
+                                    Matrix m = matrixMap.get(data[1]).transposition();
+                                    if (data.length == 5 && Objects.equals(data[3], "putIn")) {
+                                        matrixMap.put(data[4], m);
+                                    }
+                                    TextFormatter.outConsole(
+                                            m.view(),
+                                            TextFormatter.BLUE
+                                    );
+                                } else if (Objects.equals(data[2], "inverse")) {
+                                    Matrix m = matrixMap.get(data[1]).inverse();
+                                    if (data.length == 5 && Objects.equals(data[3], "putIn")) {
+                                        matrixMap.put(data[4], m);
+                                    }
+                                    TextFormatter.outConsole(
+                                            m.view(),
+                                            TextFormatter.BLUE
+                                    );
+                                } else if (Objects.equals(data[2], "getWithoutRow")) {
+                                    Matrix m = matrixMap.get(data[1]).getWithoutRow(Integer.parseInt(data[3]));
+                                    if (data.length == 6 && Objects.equals(data[4], "putIn")) {
+                                        matrixMap.put(data[5], m);
+                                    }
+                                    TextFormatter.outConsole(
+                                            m.view(),
+                                            TextFormatter.BLUE
+                                    );
+                                } else if (Objects.equals(data[2], "getWithoutColumn")) {
+                                    Matrix m = matrixMap.get(data[1]).getWithoutColumn(Integer.parseInt(data[3]));
+                                    if (data.length == 6 && Objects.equals(data[4], "putIn")) {
+                                        matrixMap.put(data[5], m);
+                                    }
+                                    TextFormatter.outConsole(
+                                            m.view(),
+                                            TextFormatter.BLUE
+                                    );
+                                } else if (Objects.equals(data[2], "minor")) {
+                                    double x = matrixMap.get(data[1]).minor(Integer.parseInt(data[3]), Integer.parseInt(data[4]));
+                                    if (data.length == 7 && Objects.equals(data[5], "putIn")) {
+                                        doubleMap.put(data[6], x);
+                                    }
+                                    TextFormatter.outConsole(
+                                            x,
+                                            TextFormatter.BLUE
+                                    );
+                                } else if (Objects.equals(data[2], "algebraicComplements")) {
+                                    double x = matrixMap.get(data[1]).algebraicComplements(Integer.parseInt(data[3]), Integer.parseInt(data[4]));
+                                    if (data.length == 7 && Objects.equals(data[5], "putIn")) {
+                                        doubleMap.put(data[6], x);
+                                    }
+                                    TextFormatter.outConsole(
+                                            x,
+                                            TextFormatter.BLUE
+                                    );
+                                } else if (Objects.equals(data[2], "get")) {
+                                    double x = matrixMap.get(data[1]).get(Integer.parseInt(data[3]), Integer.parseInt(data[4]));
+                                    if (data.length == 7 && Objects.equals(data[5], "putIn")) {
+                                        doubleMap.put(data[6], x);
                                     }
                                     TextFormatter.outConsole(
                                             x,
@@ -268,12 +340,21 @@ public final class UI {
         TextFormatter.outConsole("   * new [rows] [columns] initAs [name] - create a new matrix by entering numbers", TextFormatter.WHITE);
         TextFormatter.outConsole("   * [matrixName] putIn [newName] - copy matrix", TextFormatter.WHITE);
         TextFormatter.outConsole("   * [matrixName] determinant putIn [newName] - calculate determinant", TextFormatter.WHITE);
+        TextFormatter.outConsole("   * [matrixName] addTo [matrixName2] putIn [newName] - add two matrices", TextFormatter.WHITE);
         TextFormatter.outConsole("   * [matrixName] multiplyBy [matrixName2] putIn [newName] - multiply two matrices", TextFormatter.WHITE);
         TextFormatter.outConsole("   * [matrixName] multiplyByDigit [numberName] putIn [newName] - multiply matrix by number", TextFormatter.WHITE);
+        TextFormatter.outConsole("   * [matrixName] power [naturalNumber] putIn [newName] - raise matrix to power", TextFormatter.WHITE);
+        TextFormatter.outConsole("   * [matrixName] minor [row] [column] putIn [newName] - calculate minor of matrix element", TextFormatter.WHITE);
+        TextFormatter.outConsole("   * [matrixName] algebraicComplements [row] [column] putIn [newName] - calculate algebraic сomplements of matrix element", TextFormatter.WHITE);
         TextFormatter.outConsole("   * [matrixName] get [row] [column] putIn [newName] - get element from matrix", TextFormatter.WHITE);
+        TextFormatter.outConsole("   * [matrixName] set [row] [column] [numberName] - set element in matrix", TextFormatter.WHITE);
         TextFormatter.outConsole("   * [matrixName] getRows putIn [newName] - get number of rows", TextFormatter.WHITE);
         TextFormatter.outConsole("   * [matrixName] getColumns putIn [newName] - get number of columns", TextFormatter.WHITE);
-        TextFormatter.outConsole("   * [matrixName] set [row] [column] [numberName] - set element in matrix", TextFormatter.WHITE);
+        TextFormatter.outConsole("   * [matrixName] getWithoutRow [row] putIn [newName] - copy matrix without some row", TextFormatter.WHITE);
+        TextFormatter.outConsole("   * [matrixName] getWithoutColumn [column] putIn [newName] - copy matrix without some column", TextFormatter.WHITE);
+        TextFormatter.outConsole("   * [matrixName] transposition putIn [newName] - get transposition matrix", TextFormatter.WHITE);
+        TextFormatter.outConsole("   * [matrixName] inverse putIn [newName] - get inverse matrix", TextFormatter.WHITE);
+        TextFormatter.outConsole("   * [matrixName] getColumns putIn [newName] - get number of columns", TextFormatter.WHITE);
         TextFormatter.outConsole("   * [matrixName] - show matrix", TextFormatter.WHITE);
         TextFormatter.outConsole("**number**", TextFormatter.WHITE);
         TextFormatter.outConsole("   * new [number] initAs [name] - create a new number", TextFormatter.WHITE);
@@ -292,9 +373,9 @@ public final class UI {
         TextFormatter.outConsole("matrix new zeros 3 3 initAs A", TextFormatter.WHITE);
         TextFormatter.outConsole("number new 5.2 initAs myNumber", TextFormatter.WHITE);
         TextFormatter.outConsole("A multiplyByDigit myNumber putIn C", TextFormatter.WHITE);
-        TextFormatter.outConsole("C", TextFormatter.WHITE);
+        TextFormatter.outConsole("matrix C", TextFormatter.WHITE);
         TextFormatter.outConsole("names", TextFormatter.WHITE);
-        TextFormatter.outConsole("forget C", TextFormatter.WHITE);
+        TextFormatter.outConsole("forget matrix C", TextFormatter.WHITE);
         TextFormatter.outConsole("exit", TextFormatter.WHITE);
         TextFormatter.outConsole("", TextFormatter.BLUE);
     }
